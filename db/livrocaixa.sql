@@ -34,6 +34,7 @@ CREATE TABLE IF NOT EXISTS `planilha_mensal` (
   `despesas_bancarias` DECIMAL(10, 2),
   `outras_saidas` DECIMAL(10, 2),
   `soma_saidas` DECIMAL(10, 2),
+  `saldo_final` DECIMAL(10, 2),
   `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
