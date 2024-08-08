@@ -69,20 +69,6 @@
       }
     ?>
   </div>
-  <!-- <?php
-  include("../config/conexao.php");
-
-  $query = $mysqli->query("SELECT * FROM images ORDER BY uploaded_on DESC");
-
-  if($query->num_rows > 0){
-      while($row = $query->fetch_assoc()){
-          $imageURL = '../livrocaixa/uploads/'.$row["file_name"];
-  ?>
-      <img src="<?php echo $imageURL; ?>" alt="" />
-  <?php }
-  }else{ ?>
-      <p>No image(s) found...</p>
-  <?php } ?> -->
 </body>
 
 <!-- Scripts JS -->
