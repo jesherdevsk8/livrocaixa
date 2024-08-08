@@ -1,0 +1,48 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: livrocaixa
+    ports:
+      - "8080:80"
+    volumes:
+      - .:/var/www/html
+    depends_on:
+      - mysql
+    restart: always
+    networks:
+      - livrocaixa_network
+
+  mysql:
+    image: mysql:8.0
+    container_name: livrocaixadb
+    environment:
+      MYSQL_ROOT_PASSWORD: senha@123
+      MYSQL_DATABASE: livrocaixa
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: senha@123
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./db:/docker-entrypoint-initdb.d
+      - ./mysql-data:/var/lib/mysql
+    restart: always
+    networks:
+      - livrocaixa_network
+
+  phpmyadmin:
+    image: phpmyadmin:5.2.1
+    container_name: livrocaixaphpmyadmin
+    restart: always
+    ports:
+      - 8081:80
+    environment:
+      - PMA_HOST=mysql
+      - PMA_PORT=3306
+    networks:
+      - livrocaixa_network
+
+networks:
+  livrocaixa_network:
+    driver: bridge
