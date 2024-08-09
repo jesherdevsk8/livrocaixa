@@ -56,3 +56,15 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
+function calcularTotalFinal() {
+  const valorTotalEntrada = parseFloat(document.getElementById('valor_total_entrada').value) || 0.0;
+  const somaSaidas = parseFloat(document.getElementById('soma_saidas').value) || 0.0;
+
+  const saldo = valorTotalEntrada - somaSaidas;
+  document.getElementById('saldo_final').value = saldo.toFixed(2);
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  const botaoCalcular = document.getElementById('calcular_button');
+  botaoCalcular.addEventListener('click', calcularTotalFinal);
+});

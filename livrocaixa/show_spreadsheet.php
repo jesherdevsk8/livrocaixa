@@ -1,7 +1,7 @@
 <?php
-  // Inclui arquivos de configuração e cabeçalho
   include("../config/conexao.php");
   include("./layout/header.php");
+  include("./include/date_format.php");
 
   $id = $_POST['id'];
 
@@ -15,10 +15,8 @@
   function formatCurrency($value) {
     return number_format($value, 2, ',', '.');
   }
-
-  $currentMonthPortuguese = date('F');
-  $currentYear = date('Y');
 ?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -83,8 +81,12 @@
   <div class="container">
     <h3>PLANILHA MENSAL IEQ REGIÃO 743 - PRÉVIA DO LIVRO CAIXA</h3>
 
-    <h3>Mês: <span id="month"><?php echo htmlspecialchars($currentMonthPortuguese); ?></span> 
-        Ano: <span id="year"><?php echo htmlspecialchars($currentYear); ?></span>
+    <?php 
+      $currentMonth = date('M');
+      $currentYear = date('Y');
+    ?>
+    <h3>Mês: <span id="month"><?php echo $currentMonthPortuguese; ?></span> 
+        Ano: <span id="year"><?php echo $currentYear; ?></span>
     </h3><br>
 
     <div class="row">
@@ -202,6 +204,26 @@
         </table>
       </div>
     </div>
+
+    <div class="row">
+      <div class="col-12">
+        <h4>SALDO FINAL::</h4>
+        <table class="table">
+          <tbody>
+            <tr>
+              <td><b class="data-element">Soma</b></td>
+              <td><?php echo formatCurrency($row["saldo_final"]); ?></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
+
+  <script>
+      window.onload = function() {
+        window.print();
+      }
+    </script>
 </body>
 </html>

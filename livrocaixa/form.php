@@ -190,9 +190,10 @@
       </div>
       <div class="row">
         <div class="col-8">
-          <div class="form-group">
-            <label for="saldo_final">Saldo Final:</label>
-            <input type="text" name="saldo_final" id="saldo_final" class="form-control" readonly>
+          <label for="saldo_final" class="mr-2">Saldo Final:</label>
+          <div class="form-group d-flex align-items-center">
+            <input type="text" name="saldo_final" id="saldo_final" class="form-control mr-2" readonly>
+            <input type="button" id="calcular_button" class="btn btn-success text-white" value="Calcular">
           </div>
         </div>
       </div>
