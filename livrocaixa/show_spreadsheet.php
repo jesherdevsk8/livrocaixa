@@ -207,7 +207,7 @@
 
     <div class="row">
       <div class="col-12">
-        <h4>SALDO FINAL::</h4>
+        <h4>SALDO FINAL:</h4>
         <table class="table">
           <tbody>
             <tr>
