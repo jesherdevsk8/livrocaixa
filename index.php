@@ -45,11 +45,11 @@
                 <tr>
                   <th>Total Entradas</th>
                   <th>Total Saídas</th>
-                  <th>Saldo Final</th>
+                  <th>Saldo A Transportar</th>
                   <th>Data</th>
                   <th class='text-center'>PDF</th>
                 </tr>";
-        // output data of each row
+
         while($row = $consulta->fetch(PDO::FETCH_ASSOC)) {
           $createdAt = DateTime::createFromFormat('Y-m-d H:i:s', $row["created_at"]);
           $formattedDate = $createdAt->format('d-m-Y');

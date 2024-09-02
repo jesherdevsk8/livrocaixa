@@ -95,32 +95,32 @@
         <table class="table border-1">
           <tbody>
             <tr>
-              <td><b class="data-element">Saldo Mês Anterior:</b></td>
-              <td><?php echo formatCurrency($row["saldo_mes_anterior"]); ?></td>
+              <td><b class="data-element">Saldo á Transportar Mês Anterior:</b></td>
+              <td>R$ <?php echo formatCurrency($row["saldo_mes_anterior"]); ?></td>
             </tr>
             <tr>
               <td><b class="data-element">Dízimos:</b></td>
-              <td><?php echo formatCurrency($row["dizimos"]); ?></td>
+              <td>R$ <?php echo formatCurrency($row["dizimos"]); ?></td>
             </tr>
             <tr>
               <td><b class="data-element">Ofertas Gerais:</b></td>
-              <td><?php echo formatCurrency($row["ofertas_gerais"]); ?></td>
+              <td>R$ <?php echo formatCurrency($row["ofertas_gerais"]); ?></td>
             </tr>
             <tr>
               <td><b class="data-element">Ofertas Especiais:</b></td>
-              <td><?php echo formatCurrency($row["ofertas_especiais"]); ?></td>
+              <td>R$ <?php echo formatCurrency($row["ofertas_especiais"]); ?></td>
             </tr>
             <tr>
               <td><b class="data-element">Ofertas Terceiro Domingo:</b></td>
-              <td><?php echo formatCurrency($row["ofertas_terceiro_domingo"]); ?></td>
+              <td>R$ <?php echo formatCurrency($row["ofertas_terceiro_domingo"]); ?></td>
             </tr>
             <tr>
               <td><b class="data-element">Doações:</b></td>
-              <td><?php echo formatCurrency($row["doacoes"]); ?></td>
+              <td>R$ <?php echo formatCurrency($row["doacoes"]); ?></td>
             </tr>
             <tr>
               <td><b class="data-element">Valor Total Entrada:</b></td>
-              <td><?php echo formatCurrency($row["valor_total_entrada"]); ?></td>
+              <td>R$ <?php echo formatCurrency($row["valor_total_entrada"]); ?></td>
             </tr>
           </tbody>
         </table>
@@ -134,71 +134,107 @@
           <tbody>
             <tr>
               <td><b class="data-element">Taxas 4% da Região:</b></td>
-              <td><?php echo formatCurrency($row["taxa_da_regiao"]); ?></td>
+              <td>R$ <?php echo formatCurrency($row["taxa_da_regiao"]); ?></td>
             </tr>
             <tr>
               <td><b class="data-element">Taxas 4% CND:</b></td>
-              <td><?php echo formatCurrency($row["taxa_cnd"]); ?></td>
+              <td>R$ <?php echo formatCurrency($row["taxa_cnd"]); ?></td>
             </tr>
             <tr>
               <td><b class="data-element">Taxa 1% Fundo Social CND:</b></td>
-              <td><?php echo formatCurrency($row["taxa_fundo_social_cnd"]); ?></td>
+              <td>R$ <?php echo formatCurrency($row["taxa_fundo_social_cnd"]); ?></td>
             </tr>
             <tr>
               <td><b class="data-element">Taxa Oferta Missões CND:</b></td>
-              <td><?php echo formatCurrency($row["taxa_oferta_missoes_cnd"]); ?></td>
+              <td>R$ <?php echo formatCurrency($row["taxa_oferta_missoes_cnd"]); ?></td>
             </tr>
             <tr>
               <td><b class="data-element">Taxa 3% FIRE:</b></td>
-              <td><?php echo formatCurrency($row["taxa_fire"]); ?></td>
+              <td>R$ <?php echo formatCurrency($row["taxa_fire"]); ?></td>
             </tr>
             <tr>
               <td><b class="data-element">Taxa 4% CED:</b></td>
-              <td><?php echo formatCurrency($row["taxa_ced"]); ?></td>
+              <td>R$ <?php echo formatCurrency($row["taxa_ced"]); ?></td>
             </tr>
             <tr>
               <td><b class="data-element">Taxa Oferta Missões CED:</b></td>
-              <td><?php echo formatCurrency($row["taxa_oferta_missoes_ced"]); ?></td>
+              <td>R$ <?php echo formatCurrency($row["taxa_oferta_missoes_ced"]); ?></td>
             </tr>
             <tr>
               <td><b class="data-element">Honorários:</b></td>
-              <td><?php echo formatCurrency($row["honorarios"]); ?></td>
+              <td>R$ <?php echo formatCurrency($row["honorarios"]); ?></td>
             </tr>
             <tr>
               <td><b class="data-element">Água:</b></td>
-              <td><?php echo formatCurrency($row["agua"]); ?></td>
+              <td>R$ <?php echo formatCurrency($row["agua"]); ?></td>
             </tr>
             <tr>
               <td><b class="data-element">Energia Elétrica:</b></td>
-              <td><?php echo formatCurrency($row["energia_eletrica"]); ?></td>
+              <td>R$ <?php echo formatCurrency($row["energia_eletrica"]); ?></td>
             </tr>
             <tr>
               <td><b class="data-element">Aluguel:</b></td>
-              <td><?php echo formatCurrency($row["aluguel"]); ?></td>
+              <td>R$ <?php echo formatCurrency($row["aluguel"]); ?></td>
             </tr>
             <tr>
               <td><b class="data-element">Despesas de Mercado:</b></td>
-              <td><?php echo formatCurrency($row["despesas_de_mercado"]); ?></td>
+              <td>R$ <?php echo formatCurrency($row["despesas_de_mercado"]); ?></td>
             </tr>
             <tr>
               <td><b class="data-element">Internet:</b></td>
-              <td><?php echo formatCurrency($row["internet"]); ?></td>
+              <td>R$ <?php echo formatCurrency($row["internet"]); ?></td>
             </tr>
             <tr>
               <td><b class="data-element">Sustento Pastoral:</b></td>
-              <td><?php echo formatCurrency($row["sustento_pastoral"]); ?></td>
+              <td>R$ <?php echo formatCurrency($row["sustento_pastoral"]); ?></td>
             </tr>
             <tr>
               <td><b class="data-element">Despesas Bancárias:</b></td>
-              <td><?php echo formatCurrency($row["despesas_bancarias"]); ?></td>
+              <td>R$ <?php echo formatCurrency($row["despesas_bancarias"]); ?></td>
             </tr>
             <tr>
-              <td><b class="data-element">Outras Saídas:</b></td>
-              <td><?php echo formatCurrency($row["outras_saidas"]); ?></td>
+              <td><b class="data-element">Materiais Elétricos:</b></td>
+              <td>R$ <?php echo formatCurrency($row["materiais_eletricos"]); ?></td>
+            </tr>
+            <tr>
+              <td><b class="data-element">Materiais de Construção:</b></td>
+              <td>R$ <?php echo formatCurrency($row["materiais_construcao"]); ?></td>
+            </tr>
+            <tr>
+              <td><b class="data-element">Reforma:</b></td>
+              <td>R$ <?php echo formatCurrency($row["reforma"]); ?></td>
+            </tr>
+            <tr>
+              <td><b class="data-element">Doações:</b></td>
+              <td>R$ <?php echo formatCurrency($row["doacoes_saidas"]); ?></td>
             </tr>
             <tr>
               <td><b class="data-element">Soma Saídas:</b></td>
-              <td><?php echo formatCurrency($row["soma_saidas"]); ?></td>
+              <td>R$ <?php echo formatCurrency($row["soma_saidas"]); ?></td>
+            </tr>
+            <tr>
+              <td style="padding: 18px;"></td>
+              <td style="padding: 18px;"></td>
+            </tr>
+            <tr>
+              <td style="padding: 18px;"></td>
+              <td style="padding: 18px;"></td>
+            </tr>
+            <tr>
+              <td style="padding: 18px;"></td>
+              <td style="padding: 18px;"></td>
+            </tr>
+            <tr>
+              <td style="padding: 18px;"></td>
+              <td style="padding: 18px;"></td>
+            </tr>
+            <tr>
+              <td style="padding: 18px;"></td>
+              <td style="padding: 18px;"></td>
+            </tr>
+            <tr>
+              <td style="padding: 18px;"></td>
+              <td style="padding: 18px;"></td>
             </tr>
           </tbody>
         </table>
@@ -207,15 +243,8 @@
 
     <div class="row">
       <div class="col-12">
-        <h4>SALDO FINAL:</h4>
-        <table class="table">
-          <tbody>
-            <tr>
-              <td><b class="data-element">Soma</b></td>
-              <td><?php echo formatCurrency($row["saldo_final"]); ?></td>
-            </tr>
-          </tbody>
-        </table>
+        <h4><strong>VALOR DAS ENTRADAS (-) SOMA DAS SAIDAS = SALDO A TRANSPORTAR </strong></h4>
+        <h4><strong>SALDO A TRANSPORTAR = R$</strong> <?php echo formatCurrency($row["saldo_final"]); ?> </h4>
       </div>
     </div>
   </div>

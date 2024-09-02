@@ -7,7 +7,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <?php include("./layout/header.php"); ?>
   <title>Cadastro</title>
-  <script src="./js/calcular.js"></script>
 </head>
 <body>
   <?php include('../livrocaixa/layout/navbar.php'); ?>
@@ -19,14 +18,14 @@
         $currentMonth = date('M');
         $currentYear = date('Y');
       ?>
-      <h3>Mês: <span id="month"><?php echo $currentMonthPortuguese; ?></span> 
+      <h3>Mês: <span id="month"><?php echo $currentMonthPortuguese; ?></span>
         Ano: <span id="year"><?php echo $currentYear; ?></span>
       </h3><br>
 
       <div class="row">
         <div class="col-4">
           <div class="form-group">
-            <label for="saldo_mes_anterior">Saldo Mês Anterior:</label>
+            <label for="saldo_mes_anterior">Saldo á Transportar Mês Anterior:</label>
             <input type="text" name="saldo_mes_anterior" id="saldo_mes_anterior" class="form-control">
           </div>
         </div>
@@ -75,24 +74,24 @@
       <div class="row">
         <div class="col-4">
           <div class="form-group">
-            <label for="taxa_da_regiao">Taxa da Região:</label>
+            <label for="taxa_da_regiao">Taxa 4% da Região:</label>
             <input type="text" name="taxa_da_regiao" id="taxa_da_regiao" class="form-control">
           </div>
         </div>
         <div class="col-4">
           <div class="form-group">
-            <label for="taxa_cnd">Taxa CND:</label>
+            <label for="taxa_cnd">Taxa 4% CND:</label>
             <input type="text" name="taxa_cnd" id="taxa_cnd" class="form-control">
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="form-group">
+            <label for="taxa_fundo_social_cnd">Taxa 1% Fundo Social CND:</label>
+            <input type="text" name="taxa_fundo_social_cnd" id="taxa_fundo_social_cnd" class="form-control">
           </div>
         </div>
       </div>
       <div class="row">
-        <div class="col-4">
-          <div class="form-group">
-            <label for="taxa_fundo_social_cnd">Taxa Fundo Social CND:</label>
-            <input type="text" name="taxa_fundo_social_cnd" id="taxa_fundo_social_cnd" class="form-control">
-          </div>
-        </div>
         <div class="col-4">
           <div class="form-group">
             <label for="taxa_oferta_missoes_cnd">Taxa Oferta Missões CND:</label>
@@ -101,18 +100,18 @@
         </div>
         <div class="col-4">
           <div class="form-group">
-            <label for="taxa_fire">Taxa FIRE:</label>
+            <label for="taxa_fire">Taxa 3% FIRE:</label>
             <input type="text" name="taxa_fire" id="taxa_fire" class="form-control">
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="form-group">
+            <label for="taxa_ced">Taxa 4% CED:</label>
+            <input type="text" name="taxa_ced" id="taxa_ced" class="form-control">
           </div>
         </div>
       </div>
       <div class="row">
-        <div class="col-4">
-          <div class="form-group">
-            <label for="taxa_ced">Taxa CED:</label>
-            <input type="text" name="taxa_ced" id="taxa_ced" class="form-control">
-          </div>
-        </div>
         <div class="col-4">
           <div class="form-group">
             <label for="taxa_oferta_missoes_ced">Taxa Oferta Missões CED:</label>
@@ -125,14 +124,14 @@
             <input type="text" name="honorarios" id="honorarios" class="form-control">
           </div>
         </div>
-      </div>
-      <div class="row">
         <div class="col-4">
           <div class="form-group">
             <label for="agua">Água:</label>
             <input type="text" name="agua" id="agua" class="form-control">
           </div>
         </div>
+      </div>
+      <div class="row">
         <div class="col-4">
           <div class="form-group">
             <label for="energia_eletrica">Energia Elétrica:</label>
@@ -143,6 +142,12 @@
           <div class="form-group">
             <label for="aluguel">Aluguel:</label>
             <input type="text" name="aluguel" id="aluguel" class="form-control">
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="form-group">
+            <label for="despesas_de_viagens">Despesas de Viagens:</label>
+            <input type="text" name="despesas_de_viagens" id="despesas_de_viagens" class="form-control">
           </div>
         </div>
       </div>
@@ -175,8 +180,28 @@
         </div>
         <div class="col-4">
           <div class="form-group">
-            <label for="outras_saidas">Outras Saídas:</label>
-            <input type="text" name="outras_saidas" id="outras_saidas" class="form-control">
+            <label for="materiais_eletricos">Materiais Elétricos:</label>
+            <input type="text" name="materiais_eletricos" id="materiais_eletricos" class="form-control">
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="form-group">
+            <label for="materiais_construcao">Materiais de Construção:</label>
+            <input type="text" name="materiais_construcao" id="materiais_construcao" class="form-control">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-4">
+          <div class="form-group">
+            <label for="reforma">Reforma:</label>
+            <input type="text" name="reforma" id="reforma" class="form-control">
+          </div>
+        </div>
+        <div class="col-4">
+          <div class="form-group">
+            <label for="doacoes_saidas">Doações Saídas:</label>
+            <input type="text" name="doacoes_saidas" id="doacoes_saidas" class="form-control">
           </div>
         </div>
       </div>
@@ -202,5 +227,7 @@
       <button type="reset" class="btn btn-secondary">Reset</button>
     </form>
   </div>
+
+  <script src="./js/calcule.js"></script>
 </body>
 </html>
