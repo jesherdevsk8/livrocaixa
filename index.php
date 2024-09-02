@@ -36,7 +36,20 @@
     <?php
       include("config/conexao.php");
 
-      $sql = "SELECT id, valor_total_entrada, soma_saidas, saldo_final, created_at FROM planilha_mensal ORDER BY created_at DESC";
+      // Defina o número de resultados por página
+      $results_per_page = 10;
+
+      // Descubra em qual página o usuário está
+      $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+
+      // Calcule o valor do OFFSET
+      $start_from = ($page - 1) * $results_per_page;
+
+      // Execute a consulta SQL com a limitação para paginação
+      $sql = "SELECT id, valor_total_entrada, soma_saidas, saldo_final, created_at 
+              FROM planilha_mensal 
+              ORDER BY created_at DESC 
+              LIMIT $start_from, $results_per_page";
       $consulta = $PDO->prepare($sql);
       $consulta->execute();
 
@@ -50,7 +63,7 @@
                   <th class='text-center'>PDF</th>
                 </tr>";
 
-        while($row = $consulta->fetch(PDO::FETCH_ASSOC)) {
+        while ($row = $consulta->fetch(PDO::FETCH_ASSOC)) {
           $createdAt = DateTime::createFromFormat('Y-m-d H:i:s', $row["created_at"]);
           $formattedDate = $createdAt->format('d-m-Y');
 
@@ -58,7 +71,7 @@
                   <td>" . number_format($row["valor_total_entrada"], 2, ',', '.') . "</td>
                   <td>" . number_format($row["soma_saidas"], 2, ',', '.') . "</td>
                   <td>" . number_format($row["saldo_final"], 2, ',', '.') . "</td>
-                  <td>" . $formattedDate  . "</td>
+                  <td>" . $formattedDate . "</td>
                   <td class='text-center'>
                     <form action='livrocaixa/show_spreadsheet.php' method='POST' enctype='multipart/form-data'>
                       <input type='hidden' name='id' value='" . $row["id"] . "'>
@@ -71,6 +84,32 @@
       } else {
         echo "Nenhum resultado encontrado.";
       }
+
+      // Descubra o número total de páginas
+      $total_sql = "SELECT COUNT(*) FROM planilha_mensal";
+      $total_result = $PDO->prepare($total_sql);
+      $total_result->execute();
+      $total_rows = $total_result->fetchColumn();
+      $total_pages = ceil($total_rows / $results_per_page);
+
+      // Exiba os links de paginação
+      echo "<nav aria-label='Page navigation'>";
+      echo "<ul class='pagination justify-content-center'>";
+
+      if ($page > 1) {
+          echo "<li class='page-item'><a class='page-link' href='index.php?page=" . ($page - 1) . "'>Anterior</a></li>";
+      }
+
+      for ($i = 1; $i <= $total_pages; $i++) {
+          echo "<li class='page-item " . ($i == $page ? "active" : "") . "'><a class='page-link' href='index.php?page=" . $i . "'>" . $i . "</a></li>";
+      }
+
+      if ($page < $total_pages) {
+          echo "<li class='page-item'><a class='page-link' href='index.php?page=" . ($page + 1) . "'>Próximo</a></li>";
+      }
+
+      echo "</ul>";
+      echo "</nav>";
     ?>
   </div>
 </body>
@@ -80,7 +119,7 @@
 </html>
 
 <script>
-  (function(){
+  (function() {
     $(".search-stock").on("keyup", function() {
       var value = $(this).val().toLowerCase();
       $("tbody tr").filter(function() {

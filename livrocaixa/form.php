@@ -223,8 +223,8 @@
         </div>
       </div>
       <br>
-      <button type="submit" class="btn btn-primary">Submit</button>
-      <button type="reset" class="btn btn-secondary">Reset</button>
+      <button type="submit" class="btn btn-primary">Salvar</button>
+      <button type="reset" class="btn btn-secondary">Limpar</button>
     </form>
   </div>
 
