@@ -1,5 +1,5 @@
 <?php
-  include("../config/conexao.php");
+  include("../config/connection.php");
   include("./layout/header.php");
   include("./include/date_format.php");
 

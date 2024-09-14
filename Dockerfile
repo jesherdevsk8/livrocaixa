@@ -7,7 +7,8 @@ RUN apt-get update && \
     apt-get install -y \
         libzip-dev \
         unzip \
-        && docker-php-ext-install zip pdo_mysql && \
+        libpq-dev \
+        && docker-php-ext-install zip pdo_pgsql && \
     cp /usr/share/zoneinfo/$TZ /etc/localtime && \
     echo $TZ > /etc/timezone
 
