@@ -1,5 +1,5 @@
 <?php
-include("../../config/conexao.php");
+include("../../config/connection.php");
 
 date_default_timezone_set('America/Sao_Paulo');
 
@@ -46,37 +46,37 @@ for ($i = 0; $i < $numberOfRecords; $i++) {
         'saldo_final' => randomValue()
     ];
 
-    $sql = "INSERT INTO `planilha_mensal` (
-                `saldo_mes_anterior`,
-                `dizimos`,
-                `ofertas_gerais`,
-                `ofertas_especiais`,
-                `ofertas_terceiro_domingo`,
-                `doacoes`,
-                `valor_total_entrada`,
-                `taxa_da_regiao`,
-                `taxa_cnd`,
-                `taxa_oferta_missoes_cnd`,
-                `taxa_fundo_social_cnd`,
-                `taxa_fire`,
-                `taxa_ced`,
-                `taxa_oferta_missoes_ced`,
-                `honorarios`,
-                `agua`,
-                `energia_eletrica`,
-                `aluguel`,
-                `despesas_de_viagens`,
-                `despesas_de_mercado`,
-                `internet`,
-                `sustento_pastoral`,
-                `despesas_bancarias`,
-                `materiais_eletricos`,
-                `materiais_construcao`,
-                `reforma`,
-                `doacoes_saidas`,
-                `soma_saidas`,
-                `saldo_final`,
-                `created_at`
+    $sql = "INSERT INTO planilha_mensal (
+                saldo_mes_anterior,
+                dizimos,
+                ofertas_gerais,
+                ofertas_especiais,
+                ofertas_terceiro_domingo,
+                doacoes,
+                valor_total_entrada,
+                taxa_da_regiao,
+                taxa_cnd,
+                taxa_oferta_missoes_cnd,
+                taxa_fundo_social_cnd,
+                taxa_fire,
+                taxa_ced,
+                taxa_oferta_missoes_ced,
+                honorarios,
+                agua,
+                energia_eletrica,
+                aluguel,
+                despesas_de_viagens,
+                despesas_de_mercado,
+                internet,
+                sustento_pastoral,
+                despesas_bancarias,
+                materiais_eletricos,
+                materiais_construcao,
+                reforma,
+                doacoes_saidas,
+                soma_saidas,
+                saldo_final,
+                created_at
             ) VALUES (
                 :saldo_mes_anterior,
                 :dizimos,

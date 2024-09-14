@@ -34,7 +34,7 @@
       </div>
     </div>
     <?php
-      include("config/conexao.php");
+      include("config/connection.php");
 
       // Defina o número de resultados por página
       $results_per_page = 10;
@@ -49,7 +49,7 @@
       $sql = "SELECT id, valor_total_entrada, soma_saidas, saldo_final, created_at 
               FROM planilha_mensal 
               ORDER BY created_at DESC 
-              LIMIT $start_from, $results_per_page";
+              LIMIT $results_per_page OFFSET $start_from";
       $consulta = $PDO->prepare($sql);
       $consulta->execute();
 

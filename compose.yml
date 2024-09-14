@@ -9,37 +9,29 @@ services:
     volumes:
       - .:/var/www/html
     depends_on:
-      - mysql
+      - postgres
     restart: always
     networks:
       - livrocaixa_network
+    environment:
+      PGSQL_HOST: postgres
+      PGSQL_PORT: 5432
+      PGSQL_USER: admin
+      PGSQL_PASSWORD: senha@123
+      PGSQL_DB_NAME: livrocaixa
 
-  mysql:
-    image: mysql:8.0
+  postgres:
+    image: postgres:15
     container_name: livrocaixadb
     environment:
-      MYSQL_ROOT_PASSWORD: senha@123
-      MYSQL_DATABASE: livrocaixa
-      MYSQL_USER: admin
-      MYSQL_PASSWORD: senha@123
+      POSTGRES_DB: livrocaixa
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: senha@123
     ports:
-      - "3306:3306"
+      - "5432:5432"
     volumes:
-      - ./db:/docker-entrypoint-initdb.d
-      - ./mysql-data:/var/lib/mysql
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
     restart: always
-    networks:
-      - livrocaixa_network
-
-  phpmyadmin:
-    image: phpmyadmin:5.2.1
-    container_name: livrocaixaphpmyadmin
-    restart: always
-    ports:
-      - 8081:80
-    environment:
-      - PMA_HOST=mysql
-      - PMA_PORT=3306
     networks:
       - livrocaixa_network
 
