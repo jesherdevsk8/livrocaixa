@@ -34,7 +34,7 @@
       </div>
     </div>
     <?php
-      include("config/conexao.php");
+      include("config/connection.php");
 
       // Defina o número de resultados por página
       $results_per_page = 10;

@@ -1,5 +1,5 @@
 <?php
-  include("../config/conexao.php");
+  include("../config/connection.php");
 
   extract($_POST);
 

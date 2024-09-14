@@ -1,5 +1,5 @@
 <?php
-include("../../config/conexao.php");
+include("../../config/connection.php");
 
 date_default_timezone_set('America/Sao_Paulo');
 
