@@ -34,6 +34,7 @@
     'reforma' => $reforma,
     'doacoes_saidas' => $doacoes_saidas,
     'soma_saidas' => $soma_saidas,
+    'mes_referencia' => $mes_referencia,
     'saldo_final' => $saldo_final
   ];
 
@@ -72,6 +73,7 @@
               reforma,
               doacoes_saidas,
               soma_saidas,
+              mes_referencia,
               saldo_final,
               created_at
           ) VALUES (
@@ -103,25 +105,25 @@
               :reforma,
               :doacoes_saidas,
               :soma_saidas,
+              :mes_referencia,
               :saldo_final,
               :created_at
           )";
 
   try {
-      $statement = $PDO->prepare($sql);
-      $result = $statement->execute(array_merge($fields, [
-        ':created_at' => date('Y-m-d H:i:s')
-      ]));
+    $statement = $PDO->prepare($sql);
+    $result = $statement->execute(array_merge($fields, [
+      ':created_at' => date('Y-m-d H:i:s')
+    ]));
 
-      if ($result) {
-        header("Location: ../index.php");
-        exit();
-      } else {
-        print_r($statement->errorInfo());
-        echo "Ocorreu um erro ao inserir os dados.";
-      }
+    if ($result) {
+      echo "ok";
+    } else {
+      print_r($statement->errorInfo());
+      echo "error_sql";
+    }
   } catch (PDOException $e) {
     print_r($statement->errorInfo());
-    echo "Erro ao inserir dados. Verifique os logs para mais detalhes.";
+    echo "error";
   }
 ?>

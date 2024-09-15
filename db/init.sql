@@ -2,9 +2,9 @@
 DROP TABLE IF EXISTS usuarios;
 CREATE TABLE IF NOT EXISTS usuarios (
   id SERIAL PRIMARY KEY,
-  email VARCHAR(250) NOT NULL,
-  senha VARCHAR(250) NOT NULL,
-  credencial VARCHAR(50) NOT NULL,
+  email VARCHAR(255) NOT NULL UNIQUE,
+  senha VARCHAR(255) NOT NULL,
+  credencial VARCHAR(50) NOT NULL UNIQUE,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -41,5 +41,6 @@ CREATE TABLE IF NOT EXISTS planilha_mensal (
   doacoes_saidas DECIMAL(10, 2),
   soma_saidas DECIMAL(10, 2),
   saldo_final DECIMAL(10, 2),
+  mes_referencia VARCHAR(50) NOT NULL,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

@@ -1,7 +1,13 @@
 <?php
+  session_start();
+
   include("../config/connection.php");
   include("./layout/header.php");
   include("./include/date_format.php");
+  
+  include('../lib/security.php');
+
+  protegeLogin();
 
   $id = $_POST['id'];
 
@@ -23,6 +29,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Relatório Mensal</title>
+  <!-- <#?php include("./layout/header.php"); ?> -->
+  
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -79,15 +87,8 @@
 </head>
 <body>
   <div class="container">
-    <h3>PLANILHA MENSAL IEQ REGIÃO 743 - PRÉVIA DO LIVRO CAIXA</h3>
-
-    <?php 
-      $currentMonth = date('M');
-      $currentYear = date('Y');
-    ?>
-    <h3>Mês: <span id="month"><?php echo $currentMonthPortuguese; ?></span> 
-        Ano: <span id="year"><?php echo $currentYear; ?></span>
-    </h3><br>
+    <h3>Relatório Mensal - IEQ Altinópolis-SP - Código: 5098</h3>
+    <h3>Mês: <span id="month"><?php echo $row["mes_referencia"]; ?></span></h3>
 
     <div class="row">
       <div class="col-12">
