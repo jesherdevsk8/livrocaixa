@@ -13,12 +13,17 @@ RUN apt-get update && \
     echo $TZ > /etc/timezone
 
 # Desativa MPMs conflitantes e ativa o prefork
-# RUN a2dismod mpm_event mpm_worker && a2enmod mpm_prefork
+RUN a2dismod mpm_event mpm_worker && a2enmod mpm_prefork
 
 COPY . /var/www/html
 
 WORKDIR /var/www/html
 
 EXPOSE 80
+
+# Configura Apache para usar a variável PORT do Heroku
+ENV APACHE_PORT=${PORT:-80}
+RUN sed -i "s/Listen 80/Listen ${APACHE_PORT}/" /etc/apache2/ports.conf
+RUN sed -i "s/<VirtualHost \*:80>/<VirtualHost *:${APACHE_PORT}/" /etc/apache2/sites-enabled/000-default.conf
 
 CMD ["apache2-foreground"]
