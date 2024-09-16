@@ -18,7 +18,4 @@ WORKDIR /var/www/html
 
 EXPOSE 80
 
-# Configura Apache para usar a variável PORT do Heroku
-ENV APACHE_PORT=${PORT:-80}
-
 CMD ["apache2-foreground"]
