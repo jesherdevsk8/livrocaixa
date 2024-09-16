@@ -42,5 +42,7 @@ CREATE TABLE IF NOT EXISTS planilha_mensal (
   soma_saidas DECIMAL(10, 2),
   saldo_final DECIMAL(10, 2),
   mes_referencia VARCHAR(50) NOT NULL,
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  usuario_id INTEGER NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE CASCADE
 );

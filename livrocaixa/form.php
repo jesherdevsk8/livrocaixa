@@ -3,7 +3,7 @@
   session_start();
 
   include('../lib/security.php');
-  include('include/date_format.php'); 
+  include('include/date_format.php');
 
   protegeLogin();
 
@@ -29,6 +29,8 @@
   <div class="container" style="padding-top:1.5em;">
     <form action="form_process.php" id="formProcess">
       <h3>Relatório Mensal - Igreja Evangélica Quadrangular (IEQ) Altinópolis-SP<br>Código: 5098</h3><br><br>
+
+      <input type="hidden" id="user_id" name="user_id" value="<?= $user_id ?>">
 
       <div class="row">
         <div class="col-4">

@@ -1,8 +1,9 @@
 $(document).ready(function() {
   $("#formProcess").on("submit", function(event) {
     event.preventDefault();
-    
+
     var $form = $(this),
+      user_id = $form.find("input[name='user_id']").val(),
       saldo_mes_anterior = $form.find("input[name='saldo_mes_anterior']").val(),
       dizimos = $form.find("input[name='dizimos']").val(),
       ofertas_gerais = $form.find("input[name='ofertas_gerais']").val(),
@@ -36,6 +37,7 @@ $(document).ready(function() {
       url = $form.attr("action");
 
       data = {
+        user_id: user_id,
         saldo_mes_anterior: saldo_mes_anterior,
         dizimos: dizimos,
         ofertas_gerais: ofertas_gerais,

@@ -75,6 +75,7 @@
               soma_saidas,
               mes_referencia,
               saldo_final,
+              usuario_id,
               created_at
           ) VALUES (
               :saldo_mes_anterior,
@@ -107,13 +108,15 @@
               :soma_saidas,
               :mes_referencia,
               :saldo_final,
+              :user_id,
               :created_at
           )";
 
   try {
     $statement = $PDO->prepare($sql);
     $result = $statement->execute(array_merge($fields, [
-      ':created_at' => date('Y-m-d H:i:s')
+      ':created_at' => date('Y-m-d H:i:s'),
+      ':user_id' => $user_id,
     ]));
 
     if ($result) {

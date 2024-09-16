@@ -61,11 +61,12 @@
       $start_from = ($page - 1) * $results_per_page;
 
       // Execute a consulta SQL com a limitação para paginação
-      $sql = "SELECT id, valor_total_entrada, soma_saidas, saldo_final, mes_referencia, created_at 
-              FROM planilha_mensal 
+      $sql = "SELECT id, valor_total_entrada, soma_saidas, saldo_final, mes_referencia, created_at
+              FROM planilha_mensal WHERE usuario_id = :user_id
               ORDER BY created_at DESC 
               LIMIT $results_per_page OFFSET $start_from";
       $consulta = $PDO->prepare($sql);
+      $consulta->bindParam(':user_id', $user_id);
       $consulta->execute();
 
       if ($consulta->rowCount() > 0) {
@@ -98,35 +99,35 @@
                 </tr>";
         }
         echo "</table>";
+
+          // Descubra o número total de páginas
+        $total_sql = "SELECT COUNT(*) FROM planilha_mensal";
+        $total_result = $PDO->prepare($total_sql);
+        $total_result->execute();
+        $total_rows = $total_result->fetchColumn();
+        $total_pages = ceil($total_rows / $results_per_page);
+
+        // Exiba os links de paginação
+        echo "<nav aria-label='Page navigation'>";
+        echo "<ul class='pagination justify-content-center'>";
+
+        if ($page > 1) {
+            echo "<li class='page-item'><a class='page-link' href='admin.php?page=" . ($page - 1) . "'>Anterior</a></li>";
+        }
+
+        for ($i = 1; $i <= $total_pages; $i++) {
+            echo "<li class='page-item " . ($i == $page ? "active" : "") . "'><a class='page-link' href='admin.php?page=" . $i . "'>" . $i . "</a></li>";
+        }
+
+        if ($page < $total_pages) {
+            echo "<li class='page-item'><a class='page-link' href='admin.php?page=" . ($page + 1) . "'>Próximo</a></li>";
+        }
+
+        echo "</ul>";
+        echo "</nav>";
       } else {
         echo "Nenhum resultado encontrado.";
       }
-
-      // Descubra o número total de páginas
-      $total_sql = "SELECT COUNT(*) FROM planilha_mensal";
-      $total_result = $PDO->prepare($total_sql);
-      $total_result->execute();
-      $total_rows = $total_result->fetchColumn();
-      $total_pages = ceil($total_rows / $results_per_page);
-
-      // Exiba os links de paginação
-      echo "<nav aria-label='Page navigation'>";
-      echo "<ul class='pagination justify-content-center'>";
-
-      if ($page > 1) {
-          echo "<li class='page-item'><a class='page-link' href='admin.php?page=" . ($page - 1) . "'>Anterior</a></li>";
-      }
-
-      for ($i = 1; $i <= $total_pages; $i++) {
-          echo "<li class='page-item " . ($i == $page ? "active" : "") . "'><a class='page-link' href='admin.php?page=" . $i . "'>" . $i . "</a></li>";
-      }
-
-      if ($page < $total_pages) {
-          echo "<li class='page-item'><a class='page-link' href='admin.php?page=" . ($page + 1) . "'>Próximo</a></li>";
-      }
-
-      echo "</ul>";
-      echo "</nav>";
     ?>
   </div>
 </body>
