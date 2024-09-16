@@ -13,7 +13,7 @@ RUN apt-get update && \
     echo $TZ > /etc/timezone
 
 # Desativa MPMs conflitantes e ativa o prefork
-RUN a2dismod mpm_event mpm_worker && a2enmod mpm_prefork
+# RUN a2dismod mpm_event mpm_worker && a2enmod mpm_prefork
 
 COPY . /var/www/html
 
@@ -21,4 +21,4 @@ WORKDIR /var/www/html
 
 EXPOSE 80
 
-CMD ["apache2-foreground"]
+# CMD ["apache2-foreground"]
