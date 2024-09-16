@@ -1,130 +1,44 @@
+<?php
+  session_start();
+
+  if (isset($_SESSION['login']) && $_SESSION['login'] === true) {
+      header("Location: livrocaixa/admin.php");
+      exit;
+  }
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-  <?php include('livrocaixa/layout/header.php'); ?>
-  <title>Listagem</title>
-  <style>
-    .table-custom th {
-      background-color: #f8f9fa;
-      color: #212529;
-    }
-    .table-custom td {
-      background-color: #ffffff;
-      color: #212529;
-    }
-    .btn-custom {
-      background-color: #e0e0e0;
-      color: #212529;
-      border: 1px solid #ccc;
-    }
-    .btn-custom:hover {
-      background-color: #d0d0d0;
-    }
-  </style>
-</head>
-<body>
-  <?php include('livrocaixa/layout/navbar.php'); ?>
-  <div class="container" style="padding-top:1.5em;">
-    <div class="row">
-      <div class="col-9">
-        <h3>Planilhas Mensais</h3>
-      </div>
-      <div class="col-3">
-        <input type="text" class="search-stock form-control mb-3" placeholder="Pesquisar item...">
-      </div>
+  <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <title>livrocaixa</title>
+      <?php include('livrocaixa/layout/header.php'); ?>
+  </head>
+  <body>
+
+    <div class="container d-flex justify-content-center align-items-center min-vh-100">
+        <div class="card" style="width: 100%; max-width: 400px;">
+            <div class="card-body">
+                <h5 class="card-title text-center">Livro Caixa Login</h5>
+                <form action="livrocaixa/include/ajax/check_login.php" id="loginForm">
+                    <div class="form-group">
+                        <label for="email">E-mail</label>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Digite seu e-mail" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Senha</label>
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Digite sua senha" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block" id="btn-summit">Entrar</button>
+                </form>
+                <br>
+            </div>
+        </div>
     </div>
-    <?php
-      include("config/conexao.php");
 
-      // Defina o número de resultados por página
-      $results_per_page = 10;
-
-      // Descubra em qual página o usuário está
-      $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-
-      // Calcule o valor do OFFSET
-      $start_from = ($page - 1) * $results_per_page;
-
-      // Execute a consulta SQL com a limitação para paginação
-      $sql = "SELECT id, valor_total_entrada, soma_saidas, saldo_final, created_at 
-              FROM planilha_mensal 
-              ORDER BY created_at DESC 
-              LIMIT $start_from, $results_per_page";
-      $consulta = $PDO->prepare($sql);
-      $consulta->execute();
-
-      if ($consulta->rowCount() > 0) {
-        echo "<table class='table table-custom table-hover table-bordered'>
-                <tr>
-                  <th>Total Entradas</th>
-                  <th>Total Saídas</th>
-                  <th>Saldo A Transportar</th>
-                  <th>Data</th>
-                  <th class='text-center'>PDF</th>
-                </tr>";
-
-        while ($row = $consulta->fetch(PDO::FETCH_ASSOC)) {
-          $createdAt = DateTime::createFromFormat('Y-m-d H:i:s', $row["created_at"]);
-          $formattedDate = $createdAt->format('d-m-Y');
-
-          echo "<tr>
-                  <td>" . number_format($row["valor_total_entrada"], 2, ',', '.') . "</td>
-                  <td>" . number_format($row["soma_saidas"], 2, ',', '.') . "</td>
-                  <td>" . number_format($row["saldo_final"], 2, ',', '.') . "</td>
-                  <td>" . $formattedDate . "</td>
-                  <td class='text-center'>
-                    <form action='livrocaixa/show_spreadsheet.php' method='POST' enctype='multipart/form-data'>
-                      <input type='hidden' name='id' value='" . $row["id"] . "'>
-                      <button type='submit' class='btn btn-custom'>Visualizar PDF</button>
-                    </form>
-                  </td>
-                </tr>";
-        }
-        echo "</table>";
-      } else {
-        echo "Nenhum resultado encontrado.";
-      }
-
-      // Descubra o número total de páginas
-      $total_sql = "SELECT COUNT(*) FROM planilha_mensal";
-      $total_result = $PDO->prepare($total_sql);
-      $total_result->execute();
-      $total_rows = $total_result->fetchColumn();
-      $total_pages = ceil($total_rows / $results_per_page);
-
-      // Exiba os links de paginação
-      echo "<nav aria-label='Page navigation'>";
-      echo "<ul class='pagination justify-content-center'>";
-
-      if ($page > 1) {
-          echo "<li class='page-item'><a class='page-link' href='index.php?page=" . ($page - 1) . "'>Anterior</a></li>";
-      }
-
-      for ($i = 1; $i <= $total_pages; $i++) {
-          echo "<li class='page-item " . ($i == $page ? "active" : "") . "'><a class='page-link' href='index.php?page=" . $i . "'>" . $i . "</a></li>";
-      }
-
-      if ($page < $total_pages) {
-          echo "<li class='page-item'><a class='page-link' href='index.php?page=" . ($page + 1) . "'>Próximo</a></li>";
-      }
-
-      echo "</ul>";
-      echo "</nav>";
-    ?>
-  </div>
-</body>
-
-<!-- Scripts JS -->
-<?php include('livrocaixa/layout/scripts.php'); ?>
+    <?php include('livrocaixa/layout/scripts.php'); ?>
+    <script src="livrocaixa/js/check_login.js"></script>
+  </body>
 </html>
 
-<script>
-  (function() {
-    $(".search-stock").on("keyup", function() {
-      var value = $(this).val().toLowerCase();
-      $("tbody tr").filter(function() {
-        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-      });
-    });
-  }).call(this);
-</script>

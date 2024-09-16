@@ -22,4 +22,13 @@
 
   $currentMonthPortuguese = getMonthInPortuguese($currentMonthEnglish);
   $currentYear = date('Y');
+
+  // Gerar opções para os 12 meses do ano corrente
+  $options = '';
+  for ($i = 0; $i < 12; $i++) {
+      $monthDate = strtotime("+$i month", strtotime($currentYear . '-01-01'));
+      $month = date('M', $monthDate);
+      $monthPortuguese = getMonthInPortuguese($month);
+      $options .= "<option value=\"$monthPortuguese\">$monthPortuguese $currentYear</option>";
+  }
 ?>

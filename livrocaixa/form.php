@@ -1,4 +1,20 @@
-<?php include("./include/date_format.php"); ?>
+<?php 
+
+  session_start();
+
+  include('../lib/security.php');
+  include('include/date_format.php');
+
+  protegeLogin();
+
+  // definição de timezone
+  date_default_timezone_set('America/Sao_Paulo');
+
+  $user_id        = $_SESSION['id'];
+  $email          = $_SESSION['email'];
+  $credencial     = $_SESSION['credencial'];
+
+?>
 
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -11,16 +27,21 @@
 <body>
   <?php include('../livrocaixa/layout/navbar.php'); ?>
   <div class="container" style="padding-top:1.5em;">
-    <form action="../livrocaixa/form_process.php" method="POST" enctype="multipart/form-data">
-      <h3>PLANILHA MENSAL IEQ REGIÃO 743 - PRÉVIA DO LIVRO CAIXA</h3>
+    <form action="form_process.php" id="formProcess">
+      <h3>Relatório Mensal - Igreja Evangélica Quadrangular (IEQ) Altinópolis-SP<br>Código: 5098</h3><br><br>
 
-      <?php 
-        $currentMonth = date('M');
-        $currentYear = date('Y');
-      ?>
-      <h3>Mês: <span id="month"><?php echo $currentMonthPortuguese; ?></span>
-        Ano: <span id="year"><?php echo $currentYear; ?></span>
-      </h3><br>
+      <input type="hidden" id="user_id" name="user_id" value="<?= $user_id ?>">
+
+      <div class="row">
+        <div class="col-4">
+          <div class="form-group">
+            <label for="mes_referencia">Mês de Referência:</label>
+            <select name="mes_referencia" id="mes_referencia" class="form-control">
+              <?php echo $options; ?>
+            </select>
+          </div>
+        </div>
+      </div>
 
       <div class="row">
         <div class="col-4">
@@ -223,11 +244,13 @@
         </div>
       </div>
       <br>
-      <button type="submit" class="btn btn-primary">Salvar</button>
+      <button type="submit" class="btn btn-primary" id="btn-summit">Salvar</button>
       <button type="reset" class="btn btn-secondary">Limpar</button>
     </form>
   </div>
 
+  <?php include('./layout/scripts.php'); ?>
   <script src="./js/calcule.js"></script>
+  <script src="./js/form_process.js"></script>
 </body>
 </html>

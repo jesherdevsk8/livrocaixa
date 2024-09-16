@@ -47,7 +47,7 @@
 
     <script>
         function voltar() {
-            window.history.back();
+            window.location.href = '/index.php';
         }
     </script>
 </body>
