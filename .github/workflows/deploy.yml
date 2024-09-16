@@ -23,6 +23,7 @@ jobs:
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
         HEROKU_APP_NAME: ${{ secrets.HEROKU_APP_NAME }}
       run: |
+        # heroku stack:set container --app ${{ secrets.HEROKU_APP_NAME }}
         heroku container:login
         heroku container:push --app ${{ secrets.HEROKU_APP_NAME }} web
         heroku container:release --app ${{ secrets.HEROKU_APP_NAME }} web

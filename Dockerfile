@@ -12,6 +12,9 @@ RUN apt-get update && \
     cp /usr/share/zoneinfo/$TZ /etc/localtime && \
     echo $TZ > /etc/timezone
 
+# Desativa MPMs conflitantes e ativa o prefork
+RUN a2dismod mpm_event mpm_worker && a2enmod mpm_prefork
+
 COPY . /var/www/html
 
 WORKDIR /var/www/html
