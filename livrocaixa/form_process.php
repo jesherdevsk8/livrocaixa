@@ -5,43 +5,9 @@
 
   date_default_timezone_set('America/Sao_Paulo');
 
-  $fields = [
-    'saldo_mes_anterior' => $saldo_mes_anterior,
-    'dizimos' => $dizimos,
-    'ofertas_gerais' => $ofertas_gerais,
-    'ofertas_especiais' => $ofertas_especiais,
-    'ofertas_terceiro_domingo' => $ofertas_terceiro_domingo,
-    'doacoes' => $doacoes,
-    'valor_total_entrada' => $valor_total_entrada,
-    'taxa_da_regiao' => $taxa_da_regiao,
-    'taxa_cnd' => $taxa_cnd,
-    'taxa_oferta_missoes_cnd' => $taxa_oferta_missoes_cnd,
-    'taxa_fundo_social_cnd' => $taxa_fundo_social_cnd,
-    'taxa_fire' => $taxa_fire,
-    'taxa_ced' => $taxa_ced,
-    'taxa_oferta_missoes_ced' => $taxa_oferta_missoes_ced,
-    'honorarios' => $honorarios,
-    'agua' => $agua,
-    'energia_eletrica' => $energia_eletrica,
-    'aluguel' => $aluguel,
-    'despesas_de_viagens' => $despesas_de_viagens,
-    'despesas_de_mercado' => $despesas_de_mercado,
-    'internet' => $internet,
-    'sustento_pastoral' => $sustento_pastoral,
-    'despesas_bancarias' => $despesas_bancarias,
-    'materiais_eletricos' => $materiais_eletricos,
-    'materiais_construcao' => $materiais_construcao,
-    'reforma' => $reforma,
-    'doacoes_saidas' => $doacoes_saidas,
-    'soma_saidas' => $soma_saidas,
-    'mes_referencia' => $mes_referencia,
-    'saldo_final' => $saldo_final
-  ];
-
-  foreach ($fields as $key => $value) {
-    if (empty($value)) {
-      $fields[$key] = '0.00';
-    }
+  $fields = [];
+  foreach ($_POST as $key => $value) {
+    $fields[$key] = !empty($value) ? str_replace(['.', ','], ['', '.'], $value) : '0.00';
   }
 
   $sql = "INSERT INTO planilha_mensal (

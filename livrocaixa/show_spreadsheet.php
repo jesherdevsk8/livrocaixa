@@ -178,6 +178,10 @@
               <td>R$ <?php echo formatCurrency($row["aluguel"]); ?></td>
             </tr>
             <tr>
+              <td><b class="data-element">Despesas de Viagens:</b></td>
+              <td>R$ <?php echo formatCurrency($row["despesas_de_viagens"]); ?></td>
+            </tr>
+            <tr>
               <td><b class="data-element">Despesas de Mercado:</b></td>
               <td>R$ <?php echo formatCurrency($row["despesas_de_mercado"]); ?></td>
             </tr>

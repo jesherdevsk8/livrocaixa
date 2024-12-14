@@ -41,10 +41,10 @@
   <?php include('layout/navbar.php'); ?>
   <div class="container" style="padding-top:1.5em;">
     <div class="row">
-      <div class="col-9">
-        <h3>Planilhas Mensais</h3>
+      <div class="col-12 col-md-9">
+        <h3 class="mb-3 text-md-left text-center">Planilhas Mensais</h3>
       </div>
-      <div class="col-3">
+      <div class="col-12 col-md-3">
         <input type="text" class="search-stock form-control mb-3" placeholder="Pesquisar planilha mensal...">
       </div>
     </div>
@@ -70,35 +70,45 @@
       $consulta->execute();
 
       if ($consulta->rowCount() > 0) {
-        echo "<table class='table table-custom table-hover table-bordered'>
-                <tr>
-                  <th>Total Entradas</th>
-                  <th>Total Saídas</th>
-                  <th>Saldo A Transportar</th>
-                  <th>Mês de referência</th>
-                  <th>Data</th>
-                  <th class='text-center'>PDF</th>
-                </tr>";
+        echo "<div class='table-responsive'>
+                <table class='table table-custom table-hover table-bordered'>
+                <thead>
+                  <tr>
+                    <th>Total entradas</th>
+                    <th>Total saídas</th>
+                    <th>Saldo a transportar</th>
+                    <th>Mês de referência</th>
+                    <th>Data de criação</th>
+                    <th class='text-center'>Ações</th>
+                  </tr>
+                </thead>";
 
         while ($row = $consulta->fetch(PDO::FETCH_ASSOC)) {
           $createdAt = DateTime::createFromFormat('Y-m-d H:i:s', $row["created_at"]);
           $formattedDate = $createdAt->format('d-m-Y');
 
-          echo "<tr>
-                  <td>" . number_format($row["valor_total_entrada"], 2, ',', '.') . "</td>
-                  <td>" . number_format($row["soma_saidas"], 2, ',', '.') . "</td>
-                  <td>" . number_format($row["saldo_final"], 2, ',', '.') . "</td>
-                  <td>" . $row["mes_referencia"] . "</td>
-                  <td>" . $formattedDate . "</td>
-                  <td class='text-center'>
-                    <form action='show_spreadsheet.php' method='POST' enctype='multipart/form-data'>
-                      <input type='hidden' name='id' value='" . $row["id"] . "'>
-                      <button type='submit' class='btn btn-custom'>Visualizar PDF</button>
-                    </form>
-                  </td>
-                </tr>";
+          echo "<tbody>
+                  <tr>
+                    <td>R$ " . number_format($row["valor_total_entrada"], 2, ',', '.') . "</td>
+                    <td>R$ " . number_format($row["soma_saidas"], 2, ',', '.') . "</td>
+                    <td>R$ " . number_format($row["saldo_final"], 2, ',', '.') . "</td>
+                    <td>" . $row["mes_referencia"] . "</td>
+                    <td>" . $formattedDate . "</td>
+                    <td class='text-center'>
+                      <div class='btn-group' role='group'>
+                        <form action='show_spreadsheet.php' method='POST' enctype='multipart/form-data'>
+                          <input type='hidden' name='id' value='" . $row["id"] . "'>
+                          <button type='submit' class='btn btn-secondary mr-2'>
+                            <i class='bi bi-filetype-pdf'></i> PDF
+                          </button>
+                        </form>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>";
         }
-        echo "</table>";
+        echo "  </table>
+              </div>";
 
           // Descubra o número total de páginas
         $total_sql = "SELECT COUNT(*) FROM planilha_mensal";
