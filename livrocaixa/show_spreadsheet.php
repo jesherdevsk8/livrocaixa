@@ -229,18 +229,6 @@
               <td style="padding: 18px;"></td>
               <td style="padding: 18px;"></td>
             </tr>
-            <tr>
-              <td style="padding: 18px;"></td>
-              <td style="padding: 18px;"></td>
-            </tr>
-            <tr>
-              <td style="padding: 18px;"></td>
-              <td style="padding: 18px;"></td>
-            </tr>
-            <tr>
-              <td style="padding: 18px;"></td>
-              <td style="padding: 18px;"></td>
-            </tr>
           </tbody>
         </table>
       </div>
